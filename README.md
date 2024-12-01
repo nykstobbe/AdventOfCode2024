@@ -1,1 +1,2 @@
 # AdventOfCode
+This repository contains my attempt at finishing advent of code 2024. My goal is to not lose interest and complete as many puzzles as possible. I am not going for the most beautiful code or the most optimal code. I am just trying to solve the puzzles alongside my day job and personal life.
