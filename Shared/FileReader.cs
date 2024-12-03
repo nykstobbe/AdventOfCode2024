@@ -6,5 +6,10 @@
 		{
 			return [.. File.ReadAllLines(fileName)];
 		}
+
+		public static string Read(string fileName)
+		{
+			return File.ReadAllText(fileName);
+		}
 	}
 }

@@ -22,6 +22,7 @@
 					var cleanReport = report.ToList();
 					cleanReport.RemoveAt(isSafe.Item2);
 					isSafe = Shared.IsSafe(cleanReport);
+
 					if (!isSafe.Item1)
 					{
 						cleanReport = report.ToList();
