@@ -2,9 +2,6 @@
 {
 	public class PuzzleTwo : IPuzzle
 	{
-		private readonly Coord NorthEast = new(1, -1);
-		private readonly Coord SouthEast = new(1, 1);
-
 		private const string Mas = "MAS";
 		private const string Sam = "SAM";
 
@@ -20,8 +17,8 @@
 			{
 				for (var x = 0; x < Lines[y].Length; x++)
 				{
-					if (CheckWords(Mas, 0, new Coord(x, y), SouthEast) 
-					 || CheckWords(Sam, 0, new Coord(x, y), SouthEast))
+					if (CheckWords(Mas, 0, new Coord(x, y), Directions.SouthEast) 
+					 || CheckWords(Sam, 0, new Coord(x, y), Directions.SouthEast))
 						total++;
 					
 				}
@@ -45,8 +42,8 @@
 					if (secondWord)
 						return true;
 					else 
-						return CheckWords(Sam, 0, point + new Coord(-2, 0), NorthEast, true) 
-							 || CheckWords(Mas, 0, point + new Coord(-2, 0), NorthEast, true);
+						return CheckWords(Sam, 0, point + new Coord(-2, 0), Directions.NorthEast, true) 
+							 || CheckWords(Mas, 0, point + new Coord(-2, 0), Directions.NorthEast, true);
 				}
 
 				return CheckWords(word, letter + 1, point + direction, direction, secondWord);

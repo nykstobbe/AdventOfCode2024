@@ -3,10 +3,10 @@
 	public class PuzzleOne : IPuzzle
 	{
 		private readonly Coord[] _directions = [
-			new Coord(1, -1),
-			new Coord(1, 0),
-			new Coord(1, 1),
-			new Coord(0, 1)
+			Directions.NorthEast,
+			Directions.East,
+			Directions.South,
+			Directions.SouthEast,
 		];
 
 		private const string Xmas = "XMAS";

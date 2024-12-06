@@ -2,50 +2,45 @@
 {
 	public class PuzzleOne : IPuzzle
 	{
-		public List<List<char>> Grid = [];
-
-		public Coord North = new(0, -1);
-		public Coord East = new(1, 0);
-		public Coord South = new(0, 1);
-		public Coord West = new(-1, 0);
+		public Grid<char>? Grid;
 
 		public void Solve()
 		{
 			var lines = FileReader.ReadLines("input.txt");
 
-			Grid = lines.Select(lines => lines.ToCharArray()
-														 .ToList())
-							.ToList();
+			Grid = new Grid<char>(lines.Select(x => x.ToCharArray()
+																  .ToList())
+												.ToList()
+				);
 
-			var position = Shared.FindInGrid(Grid, '^') ?? throw new Exception("No starting position found");
+			var position = Grid.FindFirst('^') ?? throw new Exception("No starting position found");
 
-			var direction = North;
+			var direction = Directions.North;
 
 			while (true)
 			{
-				Grid[position.Y][position.X] = '+';
+				Grid.Set(position, '+');
 				var newPosition = position + direction;
 
-				if (newPosition.X < 0 || newPosition.X >= Grid[0].Count || newPosition.Y < 0 || newPosition.Y >= Grid.Count)
+				if(!Grid.IsInside(newPosition))
 					break;
 
-				if (Grid[newPosition.Y][newPosition.X] == '#')
+				if (Grid.Get(newPosition) == '#')
 				{
-					if (direction == North)
-						direction = East;
-					else if (direction == East)
-						direction = South;
-					else if (direction == South)
-						direction = West;
-					else if (direction == West)
-						direction = North;
+					if (direction == Directions.North)
+						direction = Directions.East;
+					else if (direction == Directions.East)
+						direction = Directions.South;
+					else if (direction == Directions.South)
+						direction = Directions.West;
+					else if (direction == Directions.West)
+						direction = Directions.North;
 				}
 
 				position += direction;
 			}
 
-			var total = Grid.SelectMany(x => x)
-							    .Count(x => x == '+');
+			var total = Grid.AmountOf('+');
 
 			Console.WriteLine(total);
 		}
